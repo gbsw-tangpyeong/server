@@ -1,21 +1,21 @@
-package com.tpc.groot.user;
+package com.tpc.groot.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
-public class CustomUser extends SecurityProperties.User {
-
+public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String userid;
+    @Column(nullable = false, unique = true)
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -23,10 +23,13 @@ public class CustomUser extends SecurityProperties.User {
     @Column(nullable = false)
     private String email;
 
-    private String profileImg;
-
-    private String address;
-
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String phone;
+
+    private String profileImg;
+    private String address;
+    private LocalDateTime createdAt;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserStatus userStatus;
 }
