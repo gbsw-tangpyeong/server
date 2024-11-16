@@ -19,10 +19,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/user/register", // 경로 수정
-                                "/user/login",
-                                "/user/logout",
-                                "/**")
+                                "/api/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())

@@ -1,22 +1,25 @@
 package com.tpc.groot.user;
 
 import com.tpc.groot.jwt.JwtProperties;
+import com.tpc.groot.jwt.TokenErrorResponse;
 import com.tpc.groot.jwt.TokenProvider;
 import com.tpc.groot.user.dto.CreateUserDto;
+import com.tpc.groot.user.dto.LoginUserDto;
 import com.tpc.groot.user.entity.CustomUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.FailedLoginException;
+import javax.security.auth.login.LoginException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
 
-    private final TokenProvider tokenProvider;
     private final UserRepository userRepository;
-    private final JwtProperties jwtProperties;
     private final PasswordEncoder passwordEncoder;
 
     public CustomUser create(CreateUserDto dto) {
@@ -32,5 +35,9 @@ public class UserService {
         user.setCreatedAt(now);
 
         return userRepository.save(user);
+    }
+
+    public CustomUser getProfile(String userName) {
+        return userRepository.findByUsername(userName);
     }
 }

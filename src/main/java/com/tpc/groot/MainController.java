@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 @Controller
 public class MainController {
-    @GetMapping("/")
+    @GetMapping("/api")
     public ResponseEntity<String> index() {
 
         return ResponseEntity.ok("API 정상 작동");
