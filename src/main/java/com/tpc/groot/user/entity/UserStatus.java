@@ -1,7 +1,6 @@
-package com.tpc.groot.user;
+package com.tpc.groot.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +8,13 @@ import lombok.Setter;
 @Setter
 @Entity
 public class UserStatus {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne
-    private User user;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private CustomUser user;
 
+    private int totalDistance;
 }
