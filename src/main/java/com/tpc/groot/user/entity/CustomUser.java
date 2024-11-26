@@ -1,5 +1,6 @@
 package com.tpc.groot.user.entity;
 
+import com.tpc.groot.status.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,5 +32,5 @@ public class CustomUser {
     private LocalDateTime createdAt;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserStatus userStatus;
+    private Status status;
 }
