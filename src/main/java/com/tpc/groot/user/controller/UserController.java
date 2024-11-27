@@ -1,15 +1,17 @@
-package com.tpc.groot.user;
+package com.tpc.groot.user.controller;
 
+import com.tpc.groot.user.UserService;
 import com.tpc.groot.user.dto.CreateUserDto;
+import com.tpc.groot.user.dto.ImageDto;
 import com.tpc.groot.user.entity.CustomUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
@@ -28,4 +30,10 @@ public class UserController {
         CustomUser user = userService.getProfile(username);
         return ResponseEntity.ok(user);
     }
+
+
+//    @PostMapping("/img/upload")
+//    public ResponseEntity<CustomUser> uploadImage(@ModelAttribute ImageDto dto, Authentication authentication) {
+//          나중에 해야지
+//    }
 }

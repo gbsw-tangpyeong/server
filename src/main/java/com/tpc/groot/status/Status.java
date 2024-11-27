@@ -14,7 +14,7 @@ public class Status {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private CustomUser user;
 
     private int totalDistance;
