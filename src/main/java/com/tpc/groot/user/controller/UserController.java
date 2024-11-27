@@ -3,6 +3,7 @@ package com.tpc.groot.user.controller;
 import com.tpc.groot.user.UserService;
 import com.tpc.groot.user.dto.CreateUserDto;
 import com.tpc.groot.user.dto.ImageDto;
+import com.tpc.groot.user.dto.LoginUserDto;
 import com.tpc.groot.user.entity.CustomUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,10 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "redirect:/";
+    }
 
 //    @PostMapping("/img/upload")
 //    public ResponseEntity<CustomUser> uploadImage(@ModelAttribute ImageDto dto, Authentication authentication) {

@@ -29,4 +29,11 @@ public class CustomUser {
 
     private String address;
     private LocalDateTime createdAt;
+
+    @OneToOne
+    @JoinColumn(name = "statusId", referencedColumnName = "id")
+    private Status status;
+
+    @OneToOne
+    private ProfileImg img;
 }
