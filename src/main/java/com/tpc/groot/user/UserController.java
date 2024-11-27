@@ -1,7 +1,6 @@
 package com.tpc.groot.user;
 
 import com.tpc.groot.user.dto.CreateUserDto;
-import com.tpc.groot.user.dto.LoginUserDto;
 import com.tpc.groot.user.entity.CustomUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
