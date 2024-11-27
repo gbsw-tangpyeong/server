@@ -9,6 +9,7 @@ import com.tpc.groot.user.entity.CustomUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.security.auth.login.FailedLoginException;
 import javax.security.auth.login.LoginException;
@@ -30,7 +31,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setEmail(dto.getEmail());
         user.setPhone(dto.getPhone());
-        user.setProfileImg(dto.getProfileImg());
         user.setAddress(dto.getAddress());
         user.setCreatedAt(now);
 

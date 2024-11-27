@@ -27,10 +27,6 @@ public class CustomUser {
     @Column(nullable = false, unique = true)
     private String phone;
 
-    private String profileImg;
     private String address;
     private LocalDateTime createdAt;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Status status;
 }
