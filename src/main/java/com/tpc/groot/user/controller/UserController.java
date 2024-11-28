@@ -1,18 +1,14 @@
 package com.tpc.groot.user.controller;
 
-import com.tpc.groot.user.UserService;
 import com.tpc.groot.user.dto.CreateUserDto;
-import com.tpc.groot.user.dto.ImageDto;
-import com.tpc.groot.user.dto.LoginUserDto;
 import com.tpc.groot.user.entity.CustomUser;
+import com.tpc.groot.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
@@ -23,7 +19,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<CustomUser> createUser(@RequestBody @Valid CreateUserDto dto) {
         CustomUser user = userService.create(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user); // 상태 코드 추가
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
     @GetMapping("/profile/{username}")
@@ -31,14 +27,4 @@ public class UserController {
         CustomUser user = userService.getProfile(username);
         return ResponseEntity.ok(user);
     }
-
-    @GetMapping("/login")
-    public String login() {
-        return "redirect:/";
-    }
-
-//    @PostMapping("/img/upload")
-//    public ResponseEntity<CustomUser> uploadImage(@ModelAttribute ImageDto dto, Authentication authentication) {
-//          나중에 해야지
-//    }
 }

@@ -24,7 +24,6 @@ public class CustomUser {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false, unique = true)
     private String phone;
 
     private String address;

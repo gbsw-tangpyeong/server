@@ -2,7 +2,7 @@ package com.tpc.groot.course.service;
 
 import com.tpc.groot.status.Status;
 import com.tpc.groot.status.StatusRepository;
-import com.tpc.groot.user.UserRepository;
+import com.tpc.groot.user.repository.UserRepository;
 import com.tpc.groot.user.entity.CustomUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
