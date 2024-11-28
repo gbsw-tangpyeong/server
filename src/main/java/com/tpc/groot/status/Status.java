@@ -13,8 +13,7 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @OneToOne(mappedBy = "status")
     private CustomUser user;
 
     private int totalDistance;
