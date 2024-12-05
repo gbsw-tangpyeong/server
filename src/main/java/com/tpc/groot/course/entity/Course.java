@@ -13,6 +13,9 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 코스 이름
+    private String name;
+
     // 지도 api 데이터. 나중에 추가할 것.
 
     private int totalDistance;

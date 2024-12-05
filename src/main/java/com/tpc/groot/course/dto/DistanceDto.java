@@ -10,5 +10,5 @@ public class DistanceDto {
     private int distance;
 
     @NotNull
-    private String username;
+    private Long courseId;
 }
