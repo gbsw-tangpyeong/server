@@ -32,7 +32,7 @@ public class AuthController {
         String accessToken = googleClient.requestGoogleAccessToken(code);
         GoogleAccountProfileDto profileDto = googleClient.getGoogleAccountProfile(accessToken);
 
-        CustomUser user = authService.createUserGoogle(profileDto);
+        CustomUser user = authService.createOrGetUserFromGoogle(profileDto);
 
         String token = tokenProvider.generateToken(user, Duration.ofHours(1));
         return ResponseEntity.ok(token);

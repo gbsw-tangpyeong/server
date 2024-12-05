@@ -29,15 +29,12 @@ public class GoogleClient {
     private String redirectUri;
     @Value("${spring.security.oauth2.client.registration.google.authorization-grant-type}")
     private String authorizationCode;
-    @Value("${url.access-token}")
+    @Value("${spring.security.oauth2.client.provider.google.token-uri}")
     private String accessTokenUrl;
-    @Value("${url.profile}")
+    @Value("${spring.security.oauth2.client.provider.google.user-info-uri}")
     private String profileUrl;
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+
     private final RestTemplate restTemplate;
 
     public GoogleAccountProfileDto getGoogleAccountProfile(final String code) {

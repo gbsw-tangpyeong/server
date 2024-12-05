@@ -21,18 +21,16 @@ public class AuthService {
 
     public String login(LoginUserDto dto) {
         CustomUser user = userRepository.findByUsername(dto.getUsername());
-
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }
         if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new IllegalArgumentException("Incorrect password");
         }
-
-        return tokenProvider.generateToken(user, Duration.ofHours(1)); // JWT 생성
+        return tokenProvider.generateToken(user, Duration.ofHours(1));
     }
 
-    public CustomUser createUserGoogle(GoogleAccountProfileDto dto) {
+    public CustomUser createOrGetUserFromGoogle(GoogleAccountProfileDto dto) {
         CustomUser user = userRepository.findByEmail(dto.getEmail());
         if (user == null) {
             user = new CustomUser();
@@ -41,7 +39,7 @@ public class AuthService {
             user.setPhone("");
             user.setAddress("");
             user.setCreatedAt(LocalDateTime.now());
-            user.setPassword(passwordEncoder.encode("google_user_password")); // 안전한 비밀번호 설정
+            user.setPassword(passwordEncoder.encode("google_user_password"));
             userRepository.save(user);
         }
         return user;
