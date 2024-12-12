@@ -30,12 +30,12 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/home")            // 성공 후 리디렉션 경로
                         .failureUrl("/login?error")           // 실패 시 리디렉션 경로
                 )
-                .formLogin(form -> form
-                        .loginPage("/user/login")
-                        .defaultSuccessUrl("/"))
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")))
-                .csrf(AbstractHttpConfigurer::disable);
+//                 .formLogin(form -> form
+//                         .loginPage("/api/user/login")
+//                         .defaultSuccessUrl("/"))
+//                 .logout(logout -> logout
+//                         .logoutRequestMatcher(new AntPathRequestMatcher("/api/user/logout")))
+//                 .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     }

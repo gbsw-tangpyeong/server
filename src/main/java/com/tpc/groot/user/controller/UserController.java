@@ -1,15 +1,14 @@
-package com.tpc.groot.user;
+package com.tpc.groot.user.controller;
 
 import com.tpc.groot.user.dto.CreateUserDto;
 import com.tpc.groot.user.entity.CustomUser;
+import com.tpc.groot.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
@@ -20,7 +19,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<CustomUser> createUser(@RequestBody @Valid CreateUserDto dto) {
         CustomUser user = userService.create(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user); // 상태 코드 추가
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
     @GetMapping("/profile/{username}")

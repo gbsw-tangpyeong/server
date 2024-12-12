@@ -1,18 +1,13 @@
-package com.tpc.groot.user;
+package com.tpc.groot.user.service;
 
-import com.tpc.groot.jwt.JwtProperties;
-import com.tpc.groot.jwt.TokenErrorResponse;
-import com.tpc.groot.jwt.TokenProvider;
 import com.tpc.groot.user.dto.CreateUserDto;
-import com.tpc.groot.user.dto.LoginUserDto;
+import com.tpc.groot.google.GoogleAccountProfileDto;
 import com.tpc.groot.user.entity.CustomUser;
+import com.tpc.groot.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.login.FailedLoginException;
-import javax.security.auth.login.LoginException;
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
@@ -30,7 +25,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setEmail(dto.getEmail());
         user.setPhone(dto.getPhone());
-        user.setProfileImg(dto.getProfileImg());
         user.setAddress(dto.getAddress());
         user.setCreatedAt(now);
 
@@ -40,4 +34,6 @@ public class UserService {
     public CustomUser getProfile(String userName) {
         return userRepository.findByUsername(userName);
     }
+
+
 }

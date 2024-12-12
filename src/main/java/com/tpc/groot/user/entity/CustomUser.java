@@ -24,13 +24,15 @@ public class CustomUser {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false, unique = true)
     private String phone;
 
-    private String profileImg;
     private String address;
     private LocalDateTime createdAt;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "statusId", referencedColumnName = "id")
     private Status status;
+
+    @OneToOne
+    private ProfileImg img;
 }
