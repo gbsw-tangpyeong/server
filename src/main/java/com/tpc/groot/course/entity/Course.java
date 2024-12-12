@@ -18,6 +18,7 @@ public class Course {
 
     // 지도 api 데이터. 나중에 추가할 것.
 
+
     private int totalDistance;
     // 코스 총 거리
 
