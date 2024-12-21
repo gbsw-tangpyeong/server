@@ -14,8 +14,4 @@ public class ProfileImg {
 
     @Column(nullable = false)
     private String url;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="userId", referencedColumnName = "id")
-    private CustomUser user;
 }
