@@ -21,6 +21,5 @@ public class CreateUserDto {
     @NotEmpty(message = "전화번호를 입력해주세요.")
     private String phone;
 
-    private String profileImg;
     private String address;
 }
