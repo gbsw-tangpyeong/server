@@ -18,7 +18,6 @@ public class Status {
 
     private int totalDistance;
 
-    @OneToMany
-    @JoinColumn(name="courseId", referencedColumnName = "id")
+    @OneToMany(mappedBy = "status")
     private List<Course> courses;
 }

@@ -36,5 +36,6 @@ public class CustomUser {
     private Status status;
 
     @OneToOne
+    @JoinColumn(name = "imgId", referencedColumnName = "id")
     private ProfileImg img;
 }

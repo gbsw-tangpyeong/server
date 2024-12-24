@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 @Controller
@@ -26,5 +28,18 @@ public class UserController {
     public ResponseEntity<CustomUser> getUser(@PathVariable String username) {
         CustomUser user = userService.getProfile(username);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/rank")
+    public ResponseEntity<Map<String, Object>> getUserRanking() {
+        Map<String, Object> rank = userService.getRanking(15);
+        return ResponseEntity.ok(rank);
+    }
+
+    @GetMapping("/rank/{username}")
+    public ResponseEntity<Map<String, Object>> getUserRanking(@PathVariable String username) {
+        CustomUser user = userService.getProfile(username);
+        Map<String, Object> rank = userService.getRanking(user, 15);
+        return ResponseEntity.ok(rank);
     }
 }
