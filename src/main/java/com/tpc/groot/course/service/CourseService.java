@@ -62,4 +62,9 @@ public class CourseService {
 
         return courseRepository.save(course);
     }
+
+    public Course getCourse(long courseId) {
+        Optional<Course> course = courseRepository.findById(courseId);
+        return course.orElse(null);
+    }
 }

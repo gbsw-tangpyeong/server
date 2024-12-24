@@ -53,4 +53,14 @@ public class CourseController {
         Course course = courseService.createCourse(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(course);
     }
+
+    @GetMapping("/{courseId}")
+    public ResponseEntity<Course> getCourse(@PathVariable Long courseId) {
+        Course c = courseService.getCourse(courseId);
+        if (c != null) {
+            return ResponseEntity.ok(c);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
