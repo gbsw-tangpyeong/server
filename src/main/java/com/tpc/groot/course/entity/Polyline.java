@@ -2,6 +2,8 @@ package com.tpc.groot.course.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,4 +19,8 @@ public class Polyline {
     private double lng;
 
     private int seq;
+
+    @ManyToOne
+    @JoinColumn(name = "courseId", referencedColumnName = "id")
+    private Course course;
 }

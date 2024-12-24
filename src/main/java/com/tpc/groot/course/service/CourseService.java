@@ -21,8 +21,8 @@ public class CourseService {
 
     public Status UpdateTotalDistance(long courseId, int distance){
         Optional<Course> course = courseRepository.findById(courseId);
-        CustomUser user = courseRepository.findByUser(course.get().getUser());
-        Status status = statusRepository.findByUser(user);
+        CustomUser user = userRepository.findByStatusCoursesId(courseId);
+        Status status = user.getStatus();
         status.setTotalDistance(status.getTotalDistance() + distance);
 
         return statusRepository.save(status);
