@@ -27,7 +27,7 @@ public class AuthController {
         return ResponseEntity.ok(token);
     }
 
-    @GetMapping("/login/oauth2/google")
+    @GetMapping("/login/oauth2/code/google")
     public ResponseEntity<String> googleLogin(@RequestParam String code) {
         String accessToken = googleClient.requestGoogleAccessToken(code);
         GoogleAccountProfileDto profileDto = googleClient.getGoogleAccountProfile(accessToken);
@@ -36,5 +36,6 @@ public class AuthController {
 
         String token = tokenProvider.generateToken(user, Duration.ofHours(1));
         return ResponseEntity.ok(token);
+//        return ResponseEntity.ok(token);
     }
 }

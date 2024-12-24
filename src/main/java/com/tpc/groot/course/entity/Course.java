@@ -1,9 +1,11 @@
 package com.tpc.groot.course.entity;
 
-import com.tpc.groot.user.entity.CustomUser;
+import com.tpc.groot.status.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,14 +18,17 @@ public class Course {
     // 코스 이름
     private String name;
 
-    // 지도 api 데이터. 나중에 추가할 것.
+    // 커브
+    @OneToMany(mappedBy = "course")
+    private List<Polyline> polyline;
 
-    private int totalDistance;
     // 코스 총 거리
+    private int totalDistance;
 
-    private int ranDistance;
     // 현재 진행 거리
+    private int ranDistance;
 
     @ManyToOne
-    private CustomUser user;
+    @JoinColumn(name = "statusId", referencedColumnName = "id") // Status와의 관계 설정
+    private Status status;
 }
