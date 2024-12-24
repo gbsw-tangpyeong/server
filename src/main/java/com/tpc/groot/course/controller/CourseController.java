@@ -1,6 +1,9 @@
 package com.tpc.groot.course.controller;
 
+import com.nimbusds.jose.util.Pair;
+import com.tpc.groot.course.dto.CourseDto;
 import com.tpc.groot.course.entity.Course;
+import com.tpc.groot.course.entity.Polyline;
 import com.tpc.groot.course.repository.CourseRepository;
 import com.tpc.groot.course.service.CourseService;
 import com.tpc.groot.course.dto.DistanceDto;
@@ -8,10 +11,11 @@ import com.tpc.groot.status.Status;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/api/map")
@@ -42,5 +46,11 @@ public class CourseController {
         );
 
         return ResponseEntity.ok(status);
+    }
+
+    @PostMapping
+    public ResponseEntity<Course> createCourse(@RequestBody CourseDto dto) {
+        Course course = courseService.createCourse(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(course);
     }
 }
