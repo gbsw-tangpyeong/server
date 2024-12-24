@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter
-@Setter
 @Entity
 public class Course {
     @Id
@@ -16,19 +15,28 @@ public class Course {
     private Long id;
 
     // 코스 이름
-    private String name;
+    private String title;
 
     // 커브
+    @Setter
     @OneToMany(mappedBy = "course")
-    private List<Polyline> polyline;
+    private List<Polyline> polylines;
 
     // 코스 총 거리
     private int totalDistance;
 
     // 현재 진행 거리
+    @Setter
     private int ranDistance;
 
     @ManyToOne
     @JoinColumn(name = "statusId", referencedColumnName = "id") // Status와의 관계 설정
     private Status status;
+
+    public Course() {}
+    public Course(String title, int totalDistance) {
+        this.title = title;
+        this.totalDistance = totalDistance;
+        this.ranDistance = 0;
+    }
 }
