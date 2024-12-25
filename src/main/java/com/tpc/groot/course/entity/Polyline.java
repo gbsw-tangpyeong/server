@@ -8,19 +8,25 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @Entity
 public class Polyline {
     @Id
     private long id;
 
-    private double lat;
+    private float lat;
 
-    private double lng;
+    private float lng;
 
     private int seq;
 
     @ManyToOne
     @JoinColumn(name = "courseId", referencedColumnName = "id")
     private Course course;
+
+    public Polyline(float lat, float lng, int seq, Course course) {
+        this.lat = lat;
+        this.lng = lng;
+        this.seq = seq;
+        this.course = course;
+    }
 }
