@@ -67,4 +67,8 @@ public class CourseService {
         Optional<Course> course = courseRepository.findById(courseId);
         return course.orElse(null);
     }
+
+    public void deleteCourse(long courseId) {
+        courseRepository.deleteById(courseId);
+    }
 }
