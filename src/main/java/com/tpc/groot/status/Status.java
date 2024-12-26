@@ -9,15 +9,20 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter
-@Setter
 @Entity
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     private int totalDistance;
 
     @OneToMany(mappedBy = "status")
     private List<Course> courses;
+
+    public Status() {}
+    public Status(int totalDistance) {
+        this.totalDistance = totalDistance;
+    }
 }
