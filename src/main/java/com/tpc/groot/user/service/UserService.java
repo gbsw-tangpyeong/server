@@ -46,7 +46,7 @@ public class UserService {
 
     public Map<String, Object> getRanking(int number) {
         // 상위 n명
-        List<CustomUser> ranking = userRepository.findByStatusOrderByStatusTotalDistanceDesc(Limit.of(number));
+        List<CustomUser> ranking = userRepository.findByOrderByStatusTotalDistanceDesc(Limit.of(number));
 
         Map<String, Object> result = new HashMap<>();
         result.put("ranking", ranking);
@@ -56,10 +56,10 @@ public class UserService {
 
     public Map<String, Object> getRanking(CustomUser user, int number) {
         // 상위n명
-        List<CustomUser> ranking = userRepository.findByStatusOrderByStatusTotalDistanceDesc(Limit.of(number));
+        List<CustomUser> ranking = userRepository.findByOrderByStatusTotalDistanceDesc(Limit.of(number));
 
         // 전체
-        List<CustomUser> allUsers = userRepository.findByStatusOrderByStatusTotalDistanceDesc();
+        List<CustomUser> allUsers = userRepository.findByOrderByStatusTotalDistanceDesc();
 
         int myRank = 0;
         for (int i = 0; i < allUsers.size(); i++) {

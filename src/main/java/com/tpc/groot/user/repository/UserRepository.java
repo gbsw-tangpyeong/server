@@ -15,13 +15,7 @@ public interface UserRepository extends JpaRepository<CustomUser, Long> {
 
     CustomUser findByStatusCoursesId(long courseId);
 
-    @Query("SELECT u FROM CustomUser u " +
-            "JOIN u.status s " +
-            "ORDER BY s.totalDistance DESC")
-    List<CustomUser> findByStatusOrderByStatusTotalDistanceDesc();
+    List<CustomUser> findByOrderByStatusTotalDistanceDesc();
 
-    @Query("SELECT u FROM CustomUser u " +
-            "JOIN u.status s " +
-            "ORDER BY s.totalDistance DESC")
-    List<CustomUser> findByStatusOrderByStatusTotalDistanceDesc(Limit limit);
+    List<CustomUser> findByOrderByStatusTotalDistanceDesc(Limit limit);
 }
