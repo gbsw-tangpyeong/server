@@ -35,7 +35,7 @@ public class UserService {
                 dto.getAddress(),
                 now);
 
-        Status status = new Status(0);
+        Status status = new Status(user, 0);
         statusRepository.save(status);
         return userRepository.save(user);
     }

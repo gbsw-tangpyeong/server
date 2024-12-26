@@ -3,6 +3,7 @@ package com.tpc.groot.course.service;
 import com.nimbusds.jose.util.Pair;
 import com.tpc.groot.course.dto.CourseDto;
 import com.tpc.groot.course.entity.Course;
+import com.tpc.groot.course.entity.LatLng;
 import com.tpc.groot.course.entity.Polyline;
 import com.tpc.groot.course.repository.CourseRepository;
 import com.tpc.groot.course.repository.PolylineRepository;
@@ -44,18 +45,19 @@ public class CourseService {
         else return null;
     }
 
-    private Polyline latlngToPolyline(int seq, Pair<Float, Float> latlng, Course course) {
-        Polyline p = new Polyline(latlng.getLeft(), latlng.getRight(), seq, course);
+    private Polyline latlngToPolyline(int seq, LatLng latlng, Course course) {
+        Polyline p = new Polyline(latlng.getLat(), latlng.getLng(), seq, course);
         return polylineRepository.save(p);
     }
 
-    public Course createCourse(CourseDto dto) {
-        Course course = new Course(dto.getTitle(), dto.getTotalDistance());
+    public Course createCourse(CustomUser user, CourseDto dto) {
+        Status status = statusRepository.findByCustomUser(user);
+        Course course = new Course(dto.getTitle(), dto.getTotalDistance(), status);
 
-        List<Pair<Float, Float>> latlngs = dto.getLatLngs();
+        List<LatLng> latlngs = dto.getLatLngs();
         int seq = 0;
         List<Polyline> polylines = new ArrayList<>();
-        for (Pair<Float, Float> latlng : latlngs) {
+        for (LatLng latlng : latlngs) {
             polylines.add(latlngToPolyline(++seq, latlng, course));
         }
         course.setPolylines(polylines);
@@ -70,5 +72,9 @@ public class CourseService {
 
     public void deleteCourse(long courseId) {
         courseRepository.deleteById(courseId);
+    }
+
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
     }
 }

@@ -1,5 +1,6 @@
 package com.tpc.groot.user.controller;
 
+import com.tpc.groot.status.Status;
 import com.tpc.groot.user.dto.CreateUserDto;
 import com.tpc.groot.user.entity.CustomUser;
 import com.tpc.groot.user.service.UserService;

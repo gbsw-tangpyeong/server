@@ -23,6 +23,7 @@ public class Polyline {
     @JoinColumn(name = "courseId", referencedColumnName = "id")
     private Course course;
 
+    public Polyline() {}
     public Polyline(float lat, float lng, int seq, Course course) {
         this.lat = lat;
         this.lng = lng;

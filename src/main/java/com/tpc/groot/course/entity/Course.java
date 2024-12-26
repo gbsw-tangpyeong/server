@@ -1,6 +1,7 @@
 package com.tpc.groot.course.entity;
 
 import com.tpc.groot.status.Status;
+import com.tpc.groot.user.entity.CustomUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +35,7 @@ public class Course {
     private Status status;
 
     public Course() {}
-    public Course(String title, int totalDistance) {
+    public Course(String title, int totalDistance, Status status) {
         this.title = title;
         this.totalDistance = totalDistance;
         this.ranDistance = 0;

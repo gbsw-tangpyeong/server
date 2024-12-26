@@ -21,8 +21,12 @@ public class Status {
     @OneToMany(mappedBy = "status")
     private List<Course> courses;
 
+    @OneToOne
+    private CustomUser user;
+
     public Status() {}
-    public Status(int totalDistance) {
+    public Status(CustomUser user, int totalDistance) {
+        this.user = user;
         this.totalDistance = totalDistance;
     }
 }
