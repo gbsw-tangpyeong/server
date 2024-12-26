@@ -1,5 +1,7 @@
 package com.tpc.groot.user.service;
 
+import com.tpc.groot.status.Status;
+import com.tpc.groot.status.StatusRepository;
 import com.tpc.groot.user.dto.CreateUserDto;
 import com.tpc.groot.google.GoogleAccountProfileDto;
 import com.tpc.groot.user.entity.CustomUser;
@@ -19,19 +21,22 @@ import java.util.Map;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final StatusRepository statusRepository;
     private final PasswordEncoder passwordEncoder;
 
     public CustomUser create(CreateUserDto dto) {
         LocalDateTime now = LocalDateTime.now();
 
-        CustomUser user = new CustomUser();
-        user.setUsername(dto.getUsername());
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        user.setEmail(dto.getEmail());
-        user.setPhone(dto.getPhone());
-        user.setAddress(dto.getAddress());
-        user.setCreatedAt(now);
+        CustomUser user = new CustomUser(
+                dto.getUsername(),
+                passwordEncoder.encode(dto.getPassword()),
+                dto.getEmail(),
+                dto.getPhone(),
+                dto.getAddress(),
+                now);
 
+        Status status = new Status(0);
+        statusRepository.save(status);
         return userRepository.save(user);
     }
 

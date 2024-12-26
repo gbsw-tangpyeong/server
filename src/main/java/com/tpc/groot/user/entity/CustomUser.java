@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@Setter
 @Entity
 public class CustomUser {
     @Id
@@ -38,4 +37,14 @@ public class CustomUser {
     @OneToOne
     @JoinColumn(name = "imgId", referencedColumnName = "id")
     private ProfileImg img;
+
+    public CustomUser() {}
+    public CustomUser(String username, String password, String email, String phone, String address, LocalDateTime createdAt) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.createdAt = createdAt;
+    }
 }

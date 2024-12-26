@@ -33,13 +33,14 @@ public class AuthService {
     public CustomUser createOrGetUserFromGoogle(GoogleAccountProfileDto dto) {
         CustomUser user = userRepository.findByEmail(dto.getEmail());
         if (user == null) {
-            user = new CustomUser();
-            user.setUsername(dto.getName());
-            user.setEmail(dto.getEmail());
-            user.setPhone("");
-            user.setAddress("");
-            user.setCreatedAt(LocalDateTime.now());
-            user.setPassword(passwordEncoder.encode("google_user_password"));
+            user = new CustomUser(
+                    dto.getName(),
+                    passwordEncoder.encode("google_user_password"),
+                    dto.getEmail(),
+                    "",
+                    "",
+                    LocalDateTime.now()
+                    );
             userRepository.save(user);
         }
         return user;
