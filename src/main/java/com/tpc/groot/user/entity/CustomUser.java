@@ -3,7 +3,9 @@ package com.tpc.groot.user.entity;
 import com.tpc.groot.course.entity.Course;
 import com.tpc.groot.status.Status;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +41,6 @@ public class CustomUser {
     @JoinColumn(name = "imgId", referencedColumnName = "id")
     private ProfileImg img;
 
-    public CustomUser() {}
     public CustomUser(String username, String password, String email, String phone, String address, LocalDateTime createdAt) {
         this.username = username;
         this.password = password;
