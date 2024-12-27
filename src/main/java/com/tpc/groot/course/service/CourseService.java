@@ -1,14 +1,13 @@
 package com.tpc.groot.course.service;
 
-import com.nimbusds.jose.util.Pair;
 import com.tpc.groot.course.dto.CourseDto;
 import com.tpc.groot.course.entity.Course;
 import com.tpc.groot.course.entity.LatLng;
 import com.tpc.groot.course.entity.Polyline;
 import com.tpc.groot.course.repository.CourseRepository;
 import com.tpc.groot.course.repository.PolylineRepository;
-import com.tpc.groot.status.Status;
-import com.tpc.groot.status.StatusRepository;
+import com.tpc.groot.user.entity.Status;
+import com.tpc.groot.user.repository.StatusRepository;
 import com.tpc.groot.user.repository.UserRepository;
 import com.tpc.groot.user.entity.CustomUser;
 import lombok.RequiredArgsConstructor;
@@ -65,13 +64,19 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
-    public Course getCourse(long courseId) {
+    public Course getCourse(long courseId, CustomUser user) {
         Optional<Course> course = courseRepository.findById(courseId);
-        return course.orElse(null);
+        if (course.isPresent()) {
+            if (course.get().getStatus().getUser() == user) {
+                return course.get();
+            }
+        }
+        return null;
     }
 
-    public void deleteCourse(long courseId) {
-        courseRepository.deleteById(courseId);
+    public void deleteCourse(long courseId, CustomUser user) {
+        Course course = getCourse(courseId, user);
+        courseRepository.delete(course);
     }
 
     public List<Course> getAllCourses() {

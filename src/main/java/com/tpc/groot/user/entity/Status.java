@@ -1,7 +1,6 @@
-package com.tpc.groot.status;
+package com.tpc.groot.user.entity;
 
 import com.tpc.groot.course.entity.Course;
-import com.tpc.groot.user.entity.CustomUser;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

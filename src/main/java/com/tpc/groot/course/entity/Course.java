@@ -1,7 +1,6 @@
 package com.tpc.groot.course.entity;
 
-import com.tpc.groot.status.Status;
-import com.tpc.groot.user.entity.CustomUser;
+import com.tpc.groot.user.entity.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -41,5 +40,6 @@ public class Course {
         this.title = title;
         this.totalDistance = totalDistance;
         this.ranDistance = 0;
+        this.status = status;
     }
 }

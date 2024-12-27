@@ -1,9 +1,8 @@
 package com.tpc.groot.user.service;
 
-import com.tpc.groot.status.Status;
-import com.tpc.groot.status.StatusRepository;
+import com.tpc.groot.user.entity.Status;
+import com.tpc.groot.user.repository.StatusRepository;
 import com.tpc.groot.user.dto.CreateUserDto;
-import com.tpc.groot.google.GoogleAccountProfileDto;
 import com.tpc.groot.user.entity.CustomUser;
 import com.tpc.groot.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

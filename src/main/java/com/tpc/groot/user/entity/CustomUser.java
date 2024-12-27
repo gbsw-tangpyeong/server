@@ -1,15 +1,11 @@
 package com.tpc.groot.user.entity;
 
-import com.tpc.groot.course.entity.Course;
-import com.tpc.groot.status.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Entity
