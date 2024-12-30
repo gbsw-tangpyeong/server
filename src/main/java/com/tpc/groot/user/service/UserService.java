@@ -1,9 +1,8 @@
 package com.tpc.groot.user.service;
 
-import com.tpc.groot.status.Status;
-import com.tpc.groot.status.StatusRepository;
+import com.tpc.groot.user.entity.Status;
+import com.tpc.groot.user.repository.StatusRepository;
 import com.tpc.groot.user.dto.CreateUserDto;
-import com.tpc.groot.google.GoogleAccountProfileDto;
 import com.tpc.groot.user.entity.CustomUser;
 import com.tpc.groot.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
-public class UserService {
+public class  UserService {
 
     private final UserRepository userRepository;
     private final StatusRepository statusRepository;
@@ -35,7 +34,7 @@ public class UserService {
                 dto.getAddress(),
                 now);
 
-        Status status = new Status(0);
+        Status status = new Status(user, 0);
         statusRepository.save(status);
         return userRepository.save(user);
     }
@@ -46,7 +45,7 @@ public class UserService {
 
     public Map<String, Object> getRanking(int number) {
         // 상위 n명
-        List<CustomUser> ranking = userRepository.findByStatusOrderByStatusTotalDistanceDesc(Limit.of(number));
+        List<CustomUser> ranking = userRepository.findByOrderByStatusTotalDistanceDesc(Limit.of(number));
 
         Map<String, Object> result = new HashMap<>();
         result.put("ranking", ranking);
@@ -56,10 +55,10 @@ public class UserService {
 
     public Map<String, Object> getRanking(CustomUser user, int number) {
         // 상위n명
-        List<CustomUser> ranking = userRepository.findByStatusOrderByStatusTotalDistanceDesc(Limit.of(number));
+        List<CustomUser> ranking = userRepository.findByOrderByStatusTotalDistanceDesc(Limit.of(number));
 
         // 전체
-        List<CustomUser> allUsers = userRepository.findByStatusOrderByStatusTotalDistanceDesc();
+        List<CustomUser> allUsers = userRepository.findByOrderByStatusTotalDistanceDesc();
 
         int myRank = 0;
         for (int i = 0; i < allUsers.size(); i++) {

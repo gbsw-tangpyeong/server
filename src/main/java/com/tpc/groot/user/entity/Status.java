@@ -1,15 +1,17 @@
-package com.tpc.groot.status;
+package com.tpc.groot.user.entity;
 
 import com.tpc.groot.course.entity.Course;
-import com.tpc.groot.user.entity.CustomUser;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +23,11 @@ public class Status {
     @OneToMany(mappedBy = "status")
     private List<Course> courses;
 
-    public Status() {}
-    public Status(int totalDistance) {
+    @OneToOne
+    private CustomUser user;
+
+    public Status(CustomUser user, int totalDistance) {
+        this.user = user;
         this.totalDistance = totalDistance;
     }
 }

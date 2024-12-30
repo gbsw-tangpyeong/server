@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateUserDto {
-    @NotEmpty(message = "사용자명을 입력해주세요.")
+    @NotEmpty(message = "아이디를 입력해주세요.")
     private String username;
 
     @NotEmpty(message = "비밀번호를 입력해주세요.")

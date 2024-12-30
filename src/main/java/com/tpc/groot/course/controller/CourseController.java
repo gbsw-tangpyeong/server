@@ -1,21 +1,19 @@
 package com.tpc.groot.course.controller;
 
-import com.nimbusds.jose.util.Pair;
 import com.tpc.groot.course.dto.CourseDto;
 import com.tpc.groot.course.entity.Course;
-import com.tpc.groot.course.entity.Polyline;
-import com.tpc.groot.course.repository.CourseRepository;
 import com.tpc.groot.course.service.CourseService;
 import com.tpc.groot.course.dto.DistanceDto;
-import com.tpc.groot.status.Status;
+import com.tpc.groot.user.entity.Status;
+import com.tpc.groot.user.entity.CustomUser;
+import com.tpc.groot.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.List;
 
 @RequestMapping("/api/map")
@@ -24,13 +22,11 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
-
-    @Autowired
-    private CourseRepository courseRepository;
+    private final UserService userService;
 
     @GetMapping
     public List<Course> getAllCourse(){
-        return courseRepository.findAll();
+        return courseService.getAllCourses();
     }
 
     @PostMapping("/distance")
@@ -49,8 +45,9 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<Course> createCourse(@RequestBody CourseDto dto) {
-        Course course = courseService.createCourse(dto);
+    public ResponseEntity<Course> createCourse(@RequestBody CourseDto dto, Principal principal) {
+        CustomUser user = userService.getProfile(principal.getName());
+        Course course = courseService.createCourse(user, dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(course);
     }
 
@@ -65,7 +62,8 @@ public class CourseController {
     }
 
     @DeleteMapping("/{courseId}")
-    public void deleteCourse(@PathVariable Long courseId) {
-        courseService.deleteCourse(courseId);
+    public void deleteCourse(@PathVariable Long courseId, Principal principal) {
+        CustomUser user = userService.getProfile(principal.getName());
+        courseService.deleteCourse(courseId, user);
     }
 }

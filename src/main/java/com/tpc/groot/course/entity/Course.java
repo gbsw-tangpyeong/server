@@ -1,14 +1,17 @@
 package com.tpc.groot.course.entity;
 
-import com.tpc.groot.status.Status;
+import com.tpc.groot.user.entity.Status;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +36,10 @@ public class Course {
     @JoinColumn(name = "statusId", referencedColumnName = "id") // Status와의 관계 설정
     private Status status;
 
-    public Course() {}
-    public Course(String title, int totalDistance) {
+    public Course(String title, int totalDistance, Status status) {
         this.title = title;
         this.totalDistance = totalDistance;
         this.ranDistance = 0;
+        this.status = status;
     }
 }
