@@ -67,7 +67,7 @@ public class CourseService {
     public Course getCourse(long courseId, CustomUser user) {
         Optional<Course> course = courseRepository.findById(courseId);
         if (course.isPresent()) {
-            if (course.get().getStatus().getUser() == user) {
+            if (course.get().getStatus().getCustomUser() == user) {
                 return course.get();
             }
         }

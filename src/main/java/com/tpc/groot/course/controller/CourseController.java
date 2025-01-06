@@ -52,8 +52,9 @@ public class CourseController {
     }
 
     @GetMapping("/{courseId}")
-    public ResponseEntity<Course> getCourse(@PathVariable Long courseId) {
-        Course c = courseService.getCourse(courseId);
+    public ResponseEntity<Course> getCourse(@PathVariable Long courseId, Principal principal) {
+        CustomUser user = userService.getProfile(principal.getName());
+        Course c = courseService.getCourse(courseId, user);
         if (c != null) {
             return ResponseEntity.ok(c);
         } else {

@@ -24,10 +24,10 @@ public class Status {
     private List<Course> courses;
 
     @OneToOne
-    private CustomUser user;
+    private CustomUser customUser;
 
-    public Status(CustomUser user, int totalDistance) {
-        this.user = user;
+    public Status(CustomUser customUser, int totalDistance) {
+        this.customUser = customUser;
         this.totalDistance = totalDistance;
     }
 }
